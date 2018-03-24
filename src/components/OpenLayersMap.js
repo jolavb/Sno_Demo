@@ -7,9 +7,9 @@ import BingMaps from 'ol/source/bingmaps';
 import Projection from 'ol/proj';
 import SourceVector from 'ol/source/vector';
 import Draw from 'ol/interaction/draw';
-import { MapControls } from './MapControls';
+import MapControls from './MapControls';
 import Modify from 'ol/interaction/modify';
-import {TrailList} from './TrailList';
+import TrailList from './TrailList';
 import Style from 'ol/style/style';
 import RegularShape from 'ol/style/regularshape';
 import Stroke from 'ol/style/stroke';
@@ -17,10 +17,7 @@ import Fill from 'ol/style/fill';
 import Circle from 'ol/style/circle';
 import Text from 'ol/style/text';
 
-
-
-
-export class MainMap extends React.Component{
+class OpenLayersMap extends React.Component{
   constructor(props){
     super(props);
     this.state = {DrawType: false, map: {}, hydrentIndex: 1};
@@ -173,14 +170,16 @@ export class MainMap extends React.Component{
     }
     return (
     <div id='map-container'>
-    <MapControls
-    drawTypes={this.drawTypes}
-    onClick={this.togglePolyTool}
-    polyOn={this.state.polyOn}
-    removeInteractions = {this.removeAllInteractions}
-    />
-    <TrailList />
+      <MapControls
+        drawTypes={this.drawTypes}
+        onClick={this.togglePolyTool}
+        polyOn={this.state.polyOn}
+        removeInteractions = {this.removeAllInteractions}
+      />
+      <TrailList />
     </div>
   )
   }
 }
+
+export default OpenLayersMap;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ButtonGroup } from 'react-bootstrap';
 
-export class MapControls extends React.Component{
+class MapControls extends React.Component{
 
   constructor(props){
     super(props);
@@ -15,9 +15,9 @@ export class MapControls extends React.Component{
 
   render(){
     let style= {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
+      position: 'fixed',
+      top: '0',
+      left: '30%',
       zIndex: 99
     }
 
@@ -34,3 +34,5 @@ export class MapControls extends React.Component{
     )
   }
 }
+
+export default MapControls;
