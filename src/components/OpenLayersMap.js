@@ -13,6 +13,7 @@ import Modify from 'ol/interaction/modify';
 import Snap from 'ol/interaction/snap';
 //import Geocoder from 'ol-geocoder';
 import { getMapStyle } from '../utils/mapUtils';
+import OSM from 'ol/source/osm';
 
 class OpenLayersMap extends React.Component {
   constructor(props) {
@@ -78,15 +79,20 @@ class OpenLayersMap extends React.Component {
   setupMap() {
     const { source } = this.state;
     const { hydrantSelected } = this.props;
+
     const bingMapsLayer = new TileLayer({
       visible: true,
       preload: Infinity,
       source: new BingMaps({
-        hidpi: true,
+        hidpi: false,
         key: 'ApcR8_wnFxnsXwuY_W2mPQuMb-QB0Kg-My65RJYZL2g9fN6NCFA8-s0lsvxTTs2G',
         imagerySet: 'Aerial',
+        maxZoom: 19,
       }),
+      minResolution: .2,
     });
+
+
     /*const geocoder = new Geocoder('nominatim', {
       provider: 'osm',
       lang: 'en',
@@ -97,6 +103,13 @@ class OpenLayersMap extends React.Component {
     });
 
     geocoder.setTarget(document.getElementById('searchLocations'));*/
+
+    const OSMLayer = new TileLayer({
+      source: new OSM(),
+      maxResolution: .2,
+    })
+
+
 
     const resortLayer = new LayerVector({
       source,
@@ -111,7 +124,7 @@ class OpenLayersMap extends React.Component {
     const map = new Map({
       loadTilesWhileInteracting: false,
       target: 'map-container',
-      layers: [bingMapsLayer, resortLayer],
+      layers: [OSMLayer, bingMapsLayer, resortLayer],
       view: new View({
         projection,
         center: Projection.fromLonLat(centerCoords),
