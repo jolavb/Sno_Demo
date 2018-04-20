@@ -88,8 +88,7 @@ class OpenLayersMap extends React.Component {
         key: 'ApcR8_wnFxnsXwuY_W2mPQuMb-QB0Kg-My65RJYZL2g9fN6NCFA8-s0lsvxTTs2G',
         imagerySet: 'Aerial',
         maxZoom: 19,
-      }),
-      minResolution: .2,
+      })
     });
 
 
@@ -104,13 +103,6 @@ class OpenLayersMap extends React.Component {
 
     geocoder.setTarget(document.getElementById('searchLocations'));*/
 
-    const OSMLayer = new TileLayer({
-      source: new OSM(),
-      maxResolution: .2,
-    })
-
-
-
     const resortLayer = new LayerVector({
       source,
       style: getMapStyle,
@@ -124,7 +116,7 @@ class OpenLayersMap extends React.Component {
     const map = new Map({
       loadTilesWhileInteracting: false,
       target: 'map-container',
-      layers: [OSMLayer, bingMapsLayer, resortLayer],
+      layers: [bingMapsLayer, resortLayer],
       view: new View({
         projection,
         center: Projection.fromLonLat(centerCoords),
